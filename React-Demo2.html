@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html</title>
+    <style>
+    </style>
+</head>
+<body>
+    <input type="text" id="input">
+        
+        
+    <script>
+       var input = document.getElementById("input");
+
+       // step 1: init state
+       // state represents the state of an application 
+       var state = {
+            value : ""
+       }
+
+       // step 2: setState function
+       var setState = function(newState){
+         state ={
+            ...state,
+            ...newState
+         }
+         render();  
+       }
+
+       // step 3: define the render function
+       var render = function(){
+            input.value = state.value  // console, state will have the same value as input value
+       }
+
+       // step 4: addEventListener
+       input.addEventListener("input", function(){
+            setState(
+                {
+                    value: this.value   // the value of input tab 
+                }
+            )
+       })
+        
+    </script>
+</body>
+</html>
