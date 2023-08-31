@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html</title>
+</head>
+<body>
+    <button type="button" id="like">Like</button>  
+    
+    <script>
+        var likeBtn = document.getElementById("like");
+
+        // by using state, we don't need to check the data of <button>
+        // but we can render the date of <button>, according to the state 
+        // initialize the state  
+        var state = {
+            like: false,
+            color: "red"
+        }
+
+        // use a function to change the state
+        var setState = function(newState){
+            // state = newState;   // it will change both the innerHtml and color, not good
+
+            // es6 destructuring syntax
+            // only change the state what we want to change, but keep the older one
+            // the keys of an object can not be the same, so the newStete will replace the older state.
+
+            state = {
+                ...state,    // like: false,
+                ...newState  // like: !state.like
+            }
+            render();
+        }
+
+        // render
+        var render = function(){
+            if(state.like){
+                // the state as liked
+                likeBtn.innerHTML = "Liked";
+                likeBtn.style.color = "red";
+            }else
+            {
+                // the state as like
+                likeBtn.innerHTML = "Like";
+                likeBtn.style.color = "black";
+            }
+        }
+
+        // click button and call setState to change the state and render
+        likeBtn.addEventListener("click",function(){
+            setState({
+                like : !state.like
+            })
+        })
+
+
+
+
+        /* Explaination of es6 destructuring syntax
+        at the consolo log
+        var a = {name:"lily", age: 20}
+        var b = {age: 30}
+        var c = {...a, ...b}
+        {...a} is {name:"lily", age: 20}
+        {...b} is {age: 30}
+        c is {name:"lily", age: 30} 
+        */
+    </script>
+</body>
+</html>
