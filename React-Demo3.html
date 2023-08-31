@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html</title>
+    <style>
+    </style>
+</head>
+<body>
+    <input type="text" id="input">
+    <p id="error"> It's not allowed to input more than 5 characters</p>
+        
+        
+    <script>
+        var input = document.getElementById("input");
+        var errMsg = document.getElementById("error");
+
+        var state = {
+            value: "",
+            error: false
+        }
+        
+        // newState can replace the state
+        var setState = function(newState){
+            state = {
+                ...state,
+                ...newState
+            }
+
+            render();
+        }
+
+        var render = function(){
+            input.value = state.value
+            if(state.error){
+                errMsg.style.display = "block"   // with error, display the errMsg
+            } else{
+                errMsg.style.display = "none"    // without error, display nothing
+            }
+        }
+
+        var handleInput = function(value){
+            if(value.length<=5){
+                setState({
+                    // input.length < 5, update the value 
+                    value: value  
+                })
+            } else{
+                setState({
+                    // input.length > 5, update the error
+                    error: true
+                })
+            }
+        }
+
+        input.addEventListener("input",function(){
+            handleInput(this.value)
+        })
+
+
+        
+    </script>
+</body>
+</html>
