@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>html</title>
+    <style>
+    </style>
+</head>
+<body>
+    <!-- with components -->
+    <div id="root"></div>
+ 
+    <script>
+        var root = document.getElementById("root");
+
+        // Component for inheritance the setState function with super()
+        class Component{
+            setState(newState){
+                this.state={
+                    ...state,
+                    ...newState
+                }
+            }
+        }
+
+
+        // at the console:  b = new Button /  b.render() 
+        class Button extends Component{
+            constructor(){
+                super() /* for inheritance, must to have it */
+                this.state = {
+                    like: true
+                }
+            }
+
+            /* setState(newState){ this.state={ ...state, ...newState } }*/
+
+            // onclick = handleClick() should to be rendered in the html 
+            render(){
+                return `
+                    <button type="button" style= "color: ${this.state.like ? "black" : "red"}" > 
+                        ${this.state.like ? "Like" : "Liked"}
+                    </button>
+                `
+            }
+        }
+
+        // at the console:   t = new Title  // t.render() 
+        class Title extends Component{
+            constructor(){
+                super()
+                this.state = {
+                    text: "This is a title"
+                }
+            }
+
+            /* setState(newState){ this.state={ ...state, ...newState } }*/
+
+            // onclick = handleClick() should to be rendered in the html 
+            render(){
+                return `
+                    <h1 type="text">${this.state.text}</h1>
+                `
+            }
+        } 
+        
+        class Wrap {
+            // here, the constructor is just a container
+            constructor(){
+            }
+
+            // reuse 
+            render(){
+                return `
+                    wrap
+                    ${new Title().render()}  
+                    ${new Title().render()}
+                    ${new Title().render()}
+                    ${new Button().render()}
+                `
+            }
+        }
+
+        root.innerHTML = new Wrap().render();
+
+    </script>
+</body>
+</html>
