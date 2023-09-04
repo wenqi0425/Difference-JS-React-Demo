@@ -36,7 +36,7 @@
             // call handleClick() at the consolo 
             root.innerHTML = 
             `
-                <button type="button" style= "color: ${state.like ? "black" : "red"}"> 
+                <button type="button" style= "color: ${state.like ? "black" : "red"}" onclick = handleClick()> 
                     ${state.like ? "Like" : "Liked"}
                 </button>
             `
